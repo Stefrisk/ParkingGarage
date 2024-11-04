@@ -9,13 +9,13 @@ namespace ParkingGarage
 {
     internal class Motorcycle : Vehicle
     {
-    public string BrandName {  get; set; }
+        public string BrandName {  get; set; }
         public Motorcycle() : base()
         {
             Size = 0.5;
             Color = GenColor();
             RegNum = GenRegNum();
-            Type = "Motorcycle";
+            Type = "M";
         }
 
     }

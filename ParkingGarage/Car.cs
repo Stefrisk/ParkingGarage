@@ -14,7 +14,7 @@ namespace ParkingGarage
             Size = 1;
             Color = GenColor();
             RegNum = GenRegNum();
-            Type = "Car";
+            Type = "C";
         }
     }
 }

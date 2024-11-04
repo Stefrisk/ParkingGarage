@@ -18,7 +18,30 @@ namespace ParkingGarage
             RegNum = GenRegNum();
             Color = GenColor();
         }
+        public static Vehicle MakeRandomVehicle(Garage garage)
+        {
+            Vehicle vehicle = new Vehicle();
+            Random rnd = new Random();
+            int rndNum = rnd.Next(1, 3);
+            switch (rndNum)
+            {
+                case 1:
+                    Motorcycle motorcycle = new Motorcycle();
+                    vehicle = motorcycle;
+                    break;
 
+                case 2:
+                    Car car = new Car();
+                    vehicle = car;
+                    break;
+                case 3:
+                    Buss buss = new Buss();
+                    vehicle = buss;
+                    break;
+            }
+            return vehicle;
+
+        }
         public static int GenRegNum()
         {
             Random rnd = new Random();
@@ -27,8 +50,8 @@ namespace ParkingGarage
         }
         public static string GenColor()
         {
-        string[] colors = new string[] { "red", "blue", "yellow", "Green", "Orange", "Pink", "brown", "Teal", "gold", "silver", "polka dot", "diamond" };
-        Random rand = new Random();
+            string[] colors = new string[] { "red", "blue", "yellow", "Green", "Orange", "Pink", "brown", "Teal", "gold", "silver", "polka dot", "diamond" };
+            Random rand = new Random();
             return colors[rand.Next(colors.Length)];
         }
     }

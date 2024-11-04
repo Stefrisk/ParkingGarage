@@ -15,7 +15,7 @@ namespace ParkingGarage
             Size = 2;
             Color = GenColor();
             RegNum = GenRegNum();
-            Type = "Buss";
+            Type = "B";
         }
 
     }
