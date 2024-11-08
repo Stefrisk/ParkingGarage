@@ -8,14 +8,25 @@ namespace ParkingGarage
 {
     internal class Garage
     {
+        public int CarsInGarage { get; set; }
+        public int McInGarage {  get; set; }
+        public int BussInGarage { get; set; }
         public const double MaxSpots = 15;
-        public List<Vehicle> _parkingGarage = new List<Vehicle>();
         public double availableSpots = MaxSpots;
-        public List<Vehicle> ParkingGarage
+        public double SpotsTaken
+        {
+            get { return MaxSpots - availableSpots; }
+
+        }    
+        public Dictionary<int, List<Vehicle>> _parkingGarage = new Dictionary<int, List<Vehicle>>();
+
+        public Dictionary<int, List<Vehicle>> ParkingGarage 
         {
             get { return _parkingGarage; }
-            set { _parkingGarage = value; }
+            set { _parkingGarage = value; } 
         }
+        
+        
         public Garage()
         {
 
@@ -23,42 +34,107 @@ namespace ParkingGarage
 
         public void PrintGarage(Garage garage)
         {
-            for (int i = 0; i < garage.ParkingGarage.Count;)
+            
+
+            for (int i = 0;i < ParkingGarage.Count; i++)
             {
-                Console.WriteLine(garage.ParkingGarage[i].RegNum);
-                Console.WriteLine(garage.ParkingGarage[i].Color);
-                Console.WriteLine();
+                Console.WriteLine("____________________________");
+                Console.WriteLine("Parking Spot" + (i+1) + ":");
+                foreach (Vehicle v in ParkingGarage[i])
+                {
+                    Console.WriteLine("Time parked: " + v.ParkedAt.ToString());
+                    Console.WriteLine(v.RegNum);
+                    Console.WriteLine(v.Color);
+                    if (v is Car car) 
+                    {
+                        Console.WriteLine("El car: " + car.ElCar.ToString());
+                            
+                    }
+                    if (v is Buss buss)
+                    {
+                        Console.WriteLine("Amount of passengers: " + buss.AmountofPassengers);
+                    }
+                    if(v is Motorcycle motorcycle)
+                    {
+                        Console.WriteLine("Motorcycle brand name: " + motorcycle.BrandName);
+                    }
+
+                    Console.WriteLine();
+                    
+                }
+
             }
+            
         }
         public void SortGarage(Garage garage)
         {
-            double Cars = 0;
-            double Buss = 0;
-            double MC = 0;
-            foreach (Vehicle v in ParkingGarage)
+            garage.availableSpots = 15;
+            int Cars = 0;
+            int  MC = 0;
+            int Buss = 0;
+            for (int i = 0; i < 14; i++) 
             {
-                if (v.Type == "C")
+                foreach (Vehicle v in ParkingGarage[i])
                 {
-                    Cars++;
+                    garage.availableSpots -= v.Size;
+                    if (v is Car)
+                    {
+
+                        Cars++;
+                    }
+                    else if (v is Buss)
+                    {
+                        Buss++;
+                    }
+                    else if (v is Motorcycle)
+                    {
+                        MC++;
+                    }
                 }
-                else if (v.Type == "B")
-                {
-                    Buss++;
-                }
-                else if (v.Type == "M")
-                {
-                    MC++;
-                }
+
+
+
             }
+            
+            CarsInGarage = Cars;
+            BussInGarage = Buss;
+            McInGarage = MC;
+            garage.availableSpots -= CarsInGarage + (McInGarage * 0.5) + (BussInGarage * 2);
+
         }
         public bool AddVehicle(Vehicle vehicle)
         {
             if (availableSpots >= vehicle.Size) 
             {
-                _parkingGarage.Add(vehicle);
-                availableSpots -= vehicle.Size;
-                Console.WriteLine($"{vehicle.GetType().Name}Added! Spots left:{availableSpots}");
+                if (vehicle is Car car)
+                {
+                    for (int i = 0; i < 14; i++)
+                    {
+                        if (ParkingGarage[i].Contains(null) == true)
+                        {
+                            vehicle.ParkedAt = DateTime.Now;
+                            ParkingGarage[i].Add(car);
+                            availableSpots -= car.Size;
+                            Console.WriteLine($"{car.GetType().Name}Added! Spots left:{availableSpots}");
+                            return true;
+
+                        }
+                        
+                    }
+
+                }
+                if(vehicle is Buss)
+                {
+                    for (int i = 0;i < 14; i++)
+                    {
+                        if(ParkingGarage[i].Contains(null) == true&& ParkingGarage[i+1].Contains(null) == true)
+                        {
+
+                        }
+                    }
+                }
                 return true;
+
             } 
             else
             {
