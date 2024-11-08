@@ -15,8 +15,17 @@ namespace ParkingGarage
             Size = 2;
             Color = GenColor();
             RegNum = GenRegNum();
-            Type = "B";
+            Type = "Buss";
+            AmountofPassengers = SetPassengers();
         }
+        public int SetPassengers()
+        {
+            Random rnd = new Random();
+            int p = rnd.Next(0, 20);
 
+            return p;
+
+        }
     }
+   
 }
