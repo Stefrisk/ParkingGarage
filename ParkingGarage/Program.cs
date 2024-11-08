@@ -10,7 +10,7 @@
             while (menu)
             { 
             Console.WriteLine("Welcome to the Parking Garage!\n1) Make a car\n2) Print garage\n3)Checkout\n4)End program");
-            
+            Console.WriteLine("Available spots: " + parkingGarage.availableSpots);
 
             }
             
