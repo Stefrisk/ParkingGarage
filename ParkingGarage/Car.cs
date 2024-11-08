@@ -14,7 +14,16 @@ namespace ParkingGarage
             Size = 1;
             Color = GenColor();
             RegNum = GenRegNum();
-            Type = "C";
+            Type = "Car";
+            ElCar = GenRandomBool();
         }
+
+        public bool GenRandomBool()
+        {
+            Random rnd = new Random();
+            bool elcar = rnd.Next(2) == 0;
+            return elcar;
+        }
+        
     }
 }
