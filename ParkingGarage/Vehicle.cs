@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace ParkingGarage
 {
-    internal class Vehicle
+     internal class Vehicle
     {
         public string Type { get; set; }
         public double Size { get; set; }
         public string Color { get; set; }
         public int RegNum { get; set; }
+        public DateTime ParkedAt { get; set; }
         public Vehicle()
         {
-            RegNum = GenRegNum();
-            Color = GenColor();
+           
         }
         public static Vehicle MakeRandomVehicle(Garage garage)
         {
@@ -29,15 +29,18 @@ namespace ParkingGarage
                     Motorcycle motorcycle = new Motorcycle();
                     vehicle = motorcycle;
                     break;
+                    
 
                 case 2:
                     Car car = new Car();
                     vehicle = car;
                     break;
+
                 case 3:
                     Buss buss = new Buss();
                     vehicle = buss;
                     break;
+
             }
             return vehicle;
 
