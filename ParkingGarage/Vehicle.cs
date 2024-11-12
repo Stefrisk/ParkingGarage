@@ -7,55 +7,70 @@ using System.Threading.Tasks;
 
 namespace ParkingGarage
 {
-     internal class Vehicle
+     public class Vehicle
     {
         public string Type { get; set; }
         public double Size { get; set; }
-        public string Color { get; set; }
+        public string Color  { get; set; }
         public int RegNum { get; set; }
-        public DateTime ParkedAt { get; set; }
-        public Vehicle()
+        public List<int> RegList 
         {
-           
+            get { return _regList; } 
+            
+            set { _regList = value; } 
         }
+        public List<int> _regList = new List<int>(); 
+        public DateTime ParkedAt { get; set; }
+        
+        
         public static Vehicle MakeRandomVehicle(Garage garage)
         {
             Vehicle vehicle = new Vehicle();
             Random rnd = new Random();
-            int rndNum = rnd.Next(1, 3);
+            int rndNum = rnd.Next(1, 4);
             switch (rndNum)
             {
                 case 1:
                     Motorcycle motorcycle = new Motorcycle();
                     vehicle = motorcycle;
-                    break;
-                    
+                    return motorcycle;
+
 
                 case 2:
                     Car car = new Car();
                     vehicle = car;
-                    break;
+                    return car;
 
                 case 3:
                     Buss buss = new Buss();
                     vehicle = buss;
-                    break;
+                    return buss;
 
             }
+            
             return vehicle;
 
         }
-        public static int GenRegNum()
+        
+        public void GenRegNum(List<int> RegList) //makes uniqe reg number 
         {
+            int _regNum;
             Random rnd = new Random();
-            int RegNum = rnd.Next(10000, 99999);
-            return RegNum;
+            do
+            {
+               _regNum = rnd.Next(100000, 999999);
+
+            }
+            while (RegList.Contains(_regNum));
+            RegList.Add(_regNum);
+            RegNum = _regNum;
+            
         }
-        public static string GenColor()
+        public void GenColor()
         {
-            string[] colors = new string[] { "red", "blue", "yellow", "Green", "Orange", "Pink", "brown", "Teal", "gold", "silver", "polka dot", "diamond" };
+            string[] colors = new string[] { "red", "blue", "yellow", "Green", "Orange", "Pink", "brown", "Teal", "gold", "silver", "polka dot", "diamond", "demasscus" };
             Random rand = new Random();
-            return colors[rand.Next(colors.Length)];
+            Color =  colors[rand.Next(colors.Length)];
         }
     }
 }

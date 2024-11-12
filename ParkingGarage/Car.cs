@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 namespace ParkingGarage
 {
-    internal class Car : Vehicle
+    public class Car : Vehicle
     {
         public bool ElCar { get; set; }    
         public Car() : base()
         {
             Size = 1;
-            Color = GenColor();
-            RegNum = GenRegNum();
+            GenColor();
+            GenRegNum(RegList);
             Type = "Car";
             ElCar = GenRandomBool();
         }
 
-        public bool GenRandomBool()
+        public static bool GenRandomBool()
         {
             Random rnd = new Random();
             bool elcar = rnd.Next(2) == 0;

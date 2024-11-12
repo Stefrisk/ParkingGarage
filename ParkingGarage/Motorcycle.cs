@@ -7,47 +7,49 @@ using System.Threading.Tasks;
 
 namespace ParkingGarage
 {
-    internal class Motorcycle : Vehicle
+    public class Motorcycle : Vehicle
     {
-        public string BrandName
-        {
-            get { return BrandName; }
-            set { BrandName = value; }
-        }
+        public string BrandName { get; set; }
+        
         public Motorcycle() : base()
         {
 
-            BrandName = Console.ReadLine();
+            
             Size = 0.5;
-            Color = GenColor();
-            RegNum = GenRegNum();
+            GenColor();
+            GenRegNum(RegList);
             Type = "Motorcycle";
             BrandName = GenBrand();
         }
-        public string GenBrand()
+        public static string GenBrand()
         {
-            string Brand = " ";
+            
             Random rnd = new Random();
-            int brand = rnd.Next(1, 6);
-            switch (brand)
+            int choice = rnd.Next(1, 6);
+            string brand = " ";
+            switch (choice)
             {
-                case 1: Brand = "Harley";
+                case 1:
+                    brand =  "Harley";
                     break;
-                case 2:Brand = "Duccatti";
+                case 2: brand = "Duccatti";
                     break;
-                case 3:Brand = "Honda";
+                case 3:
+                    brand = "Honda";
                     break;
-                case 4: Brand = "Kawasaki";
+                case 4:
+                    brand = "Kawasaki";
                     break;
                 case 5:
-                    Brand = "Indian";
+                    brand = "Indian";
                     break;
                 case 6:
-                    Brand = "WestCoast Choppers";
+                    brand = "WestCoast Choppers";
                     break;
 
             }
-            return Brand;
+            
+            return brand;
         }
 
 

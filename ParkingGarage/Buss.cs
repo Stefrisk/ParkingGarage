@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 
 namespace ParkingGarage
 {
-    internal class Buss : Vehicle
+    public class Buss : Vehicle
     {
         public int AmountofPassengers {  get; set; }
         public Buss() : base()
         {
             Size = 2;
-            Color = GenColor();
-            RegNum = GenRegNum();
+            GenColor();
+            GenRegNum(RegList);
             Type = "Buss";
             AmountofPassengers = SetPassengers();
         }
-        public int SetPassengers()
+        public static int SetPassengers()
         {
             Random rnd = new Random();
             int p = rnd.Next(0, 20);
