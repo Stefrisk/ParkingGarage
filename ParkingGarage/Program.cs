@@ -4,6 +4,7 @@ namespace ParkingGarage
 {
     internal class Program
     {
+        
         static void Main(string[] args)
         {
             int choice = 0;
@@ -21,8 +22,7 @@ namespace ParkingGarage
                 switch (choice)
                 {
                     case 1:
-                        Vehicle v = Vehicle.MakeRandomVehicle(parkingGarage);
-                        parkingGarage.ParkVehicle(v,parkingGarage);
+                        Vehicle.MakeAndParkRandomVehicle(parkingGarage);
                         break;
                     case 2:
                         parkingGarage.PrintGarage(parkingGarage);

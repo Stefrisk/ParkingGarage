@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace ParkingGarage
 {
-     public class Vehicle
+     public abstract class Vehicle
     {
-        public string Type { get; set; }
-        public double Size { get; set; }
-        public string Color  { get; set; }
+        public string Type { get; set; }                      
+        public  double Size { get; set; }        
+        public string Color {  get; set; }                             
         public int RegNum { get; set; }
         public List<int> RegList 
         {
@@ -23,32 +23,35 @@ namespace ParkingGarage
         public DateTime ParkedAt { get; set; }
 
         
-        public static Vehicle MakeRandomVehicle(Garage garage)
+        public static void MakeAndParkRandomVehicle(Garage garage)
         {
-            Vehicle vehicle = new Vehicle();
+            
             Random rnd = new Random();
             int rndNum = rnd.Next(1, 4);
             switch (rndNum)
             {
                 case 1:
                     Motorcycle motorcycle = new Motorcycle();
-                    vehicle = motorcycle;
-                    return motorcycle;
+                    garage.ParkVehicle(motorcycle, garage);
+                    break;
+
 
 
                 case 2:
                     Car car = new Car();
-                    vehicle = car;
-                    return car;
+                    garage.ParkVehicle(car, garage);
+                    break;
+
 
                 case 3:
                     Buss buss = new Buss();
-                    vehicle = buss;
-                    return buss;
+                    garage.ParkVehicle(buss, garage);
+                    break;
+                    
 
             }
             
-            return vehicle;
+            
 
         }
         
