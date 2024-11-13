@@ -13,9 +13,11 @@ namespace ParkingGarage
             while (menu)
             {
                 Console.Clear();
-                Console.WriteLine("Welcome to the Parking Garage!\n1) Make a car\n2) Print garage\n3)Checkout\n4)End program");
+                Console.WriteLine("Welcome to the Parking Garage!\n1) Check in\n2) Print garage\n3)Checkout\n4)End program");
                 Console.WriteLine($"Available spots: {parkingGarage.availableSpots}  Cars: {parkingGarage.CarsInGarage}  MC: {parkingGarage.McInGarage} Bus: {parkingGarage.BussInGarage} Spots taken: {parkingGarage.SpotsTaken}");
-                choice = Int32.Parse(Console.ReadLine());
+                Int32.TryParse(Console.ReadLine(), out choice);
+               
+
                 switch (choice)
                 {
                     case 1:

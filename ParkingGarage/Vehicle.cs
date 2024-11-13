@@ -19,9 +19,9 @@ namespace ParkingGarage
             
             set { _regList = value; } 
         }
-        public List<int> _regList = new List<int>(); 
+        private List<int> _regList = new List<int>(); 
         public DateTime ParkedAt { get; set; }
-        
+
         
         public static Vehicle MakeRandomVehicle(Garage garage)
         {

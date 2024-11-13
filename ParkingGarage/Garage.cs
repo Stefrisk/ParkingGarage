@@ -11,14 +11,14 @@ namespace ParkingGarage
         public int CarsInGarage { get; set; }
         public int McInGarage { get; set; }
         public int BussInGarage { get; set; }
-        public const double MaxSpots = 15;
+        private const double MaxSpots = 15;
         public double availableSpots = MaxSpots;
         public double SpotsTaken
         {
             get { return MaxSpots - availableSpots; }
 
         }
-        public List<ParkingSpot> _parkingGarage = new List<ParkingSpot>();
+        private List<ParkingSpot> _parkingGarage = new List<ParkingSpot>();
 
         public List<ParkingSpot> ParkingGarage
         {
@@ -209,17 +209,17 @@ namespace ParkingGarage
         {
             PrintGarage(garage);
             Console.WriteLine("Write the spot # of the vehicle you would like to checkout: ");
-            int choice = Int32.Parse(Console.ReadLine());
-            if (choice < ParkingGarage.Count + 1)
+            Int32.TryParse(Console.ReadLine(), out int choice);
+            if (choice < ParkingGarage.Count + 1 && choice > 0)
             {
-                DateTime now = DateTime.Now;                                                        // gets the differnce betwen now and when vehicle was parked to give us the total duration time parked 
+                DateTime now = DateTime.Now;                                                        // gets the differnce in time between now and when vehicle was parked to give us the total duration of time parked 
                 TimeSpan parkDuration = now - ParkingGarage[choice - 1].ParkSpot[0].ParkedAt;
                 double minsParked = parkDuration.Minutes;
                 double fee = minsParked * 1.5;                                                      // Calculates parking fee 
 
                 bool containsCar = ParkingGarage[choice - 1].ParkSpot.Count == 1 && ParkingGarage[choice - 1].ParkSpot[0].GetType() == typeof(Car); // checks parking spot for Car
-                bool containsBus = ParkingGarage[choice - 1].ParkSpot.Count == 1 && ParkingGarage[choice - 1].ParkSpot[0].GetType() == typeof(Buss);
-                bool alsoContainsBus = ParkingGarage[choice].ParkSpot.Count == 1 && ParkingGarage[choice].ParkSpot[0].GetType() == typeof(Buss);                                                                                                                             // checks parking spot for Bus
+                bool containsBus = ParkingGarage[choice - 1].ParkSpot.Count == 1 && ParkingGarage[choice - 1].ParkSpot[0].GetType() == typeof(Buss); // checks spot for bus
+                bool alsoContainsBus = ParkingGarage[choice].ParkSpot.Count == 1 && ParkingGarage[choice].ParkSpot[0].GetType() == typeof(Buss);   // checks neighbors spot for bus                                                                                                                           // checks parking spot for Bus
 
                 if (ParkingGarage[choice - 1].ParkSpot.Count == 2)
                 {
@@ -230,7 +230,7 @@ namespace ParkingGarage
                         Console.WriteLine("Motorcycle: " + (j) + " " + m.RegNum + " " + m.Color + " " + m.BrandName);
                         j++;
                     }
-                    int choice2 = Int32.Parse(Console.ReadLine());
+                    Int32.TryParse(Console.ReadLine(), out int choice2);
                     ParkingGarage[choice - 1].ParkSpot.RemoveAt(choice2 - 1);
                     Console.WriteLine($"Motorcycle checked out succesfully! Your fee is {fee}kr  |  Press enter to return to menu: ");
 
@@ -259,7 +259,7 @@ namespace ParkingGarage
             else
             {
 
-                Console.WriteLine("Please try again.");
+                Console.WriteLine("Something went wrong. Press Enter to return to menu: ");
 
             }
 
