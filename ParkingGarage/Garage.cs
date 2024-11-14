@@ -255,7 +255,7 @@ namespace ParkingGarage
                     Console.WriteLine($"Car checked out succesfully! Your fee is {fee}kr  |  Press enter to return to menu: ");
 
                 }
-                else if (containsBus && alsoContainsBus && ParkingGarage[choice - 1].ParkSpot[0] == ParkingGarage[choice].ParkSpot[0]) // checks for buss in both spots and makes sure they are same bus
+                else if (choice < 15 && containsBus && alsoContainsBus && ParkingGarage[choice - 1].ParkSpot[0] == ParkingGarage[choice].ParkSpot[0]) // checks for buss in both spots and makes sure they are same bus
                 {                   
                     availableSpots += 2;
                     ParkingGarage[choice - 1].ParkSpot.Clear();
